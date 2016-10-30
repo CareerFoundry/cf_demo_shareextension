@@ -14,7 +14,10 @@ class LinksViewController: UITableViewController, SFSafariViewControllerDelegate
     
     var links: Array<String> {
         get {
-            return NSUserDefaults.standardUserDefaults().objectForKey(userDefaultsKey) as! Array<String>
+            if let linksFromUserDefaults = NSUserDefaults.standardUserDefaults().objectForKey(userDefaultsKey) {
+                return linksFromUserDefaults as! Array<String>
+            }
+            return []
         }
         set {
             NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: userDefaultsKey)
